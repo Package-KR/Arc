@@ -1,0 +1,59 @@
+# Reference repos
+OpenJarvis/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log*
+logs/
+
+# Node / frontend
+node_modules/
+dist/
+build/
+!desktop/build/
+!desktop/build/**
+out/
+release/
+.next/
+.vite/
+coverage/
+*.tsbuildinfo
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local runtime data
+data/
+storage/
+sessions/
+memory/
+*.sqlite
+*.sqlite3
+*.db
+
+# Temp / cache
+tmp/
+temp/
+.cache/
+
+# IDE
+.idea/
+.vscode/
+
+# AI
+agents/
+AGENTS.md
