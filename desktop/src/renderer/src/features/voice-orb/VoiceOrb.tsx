@@ -12,7 +12,6 @@ export function VoiceOrb(): JSX.Element {
       <span className="voice-orb__wash voice-orb__wash--cyan" />
       <span className="voice-orb__wash voice-orb__wash--rose" />
       <span className="voice-orb__wash voice-orb__wash--violet" />
-      <span className="voice-orb__shine" />
     </div>
   )
 }

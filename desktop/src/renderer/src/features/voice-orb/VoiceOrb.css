@@ -2,19 +2,20 @@
   position: relative;
   width: min(54vmin, 420px);
   aspect-ratio: 1;
-  border: 1px solid rgba(255, 255, 255, 0.76);
-  border-radius: 50%;
+  border: 1px solid rgba(244, 249, 255, 0.58);
+  border-radius: 49% 51% 48% 52% / 50% 46% 54% 50%;
   overflow: hidden;
-  isolation: isolate;
   background:
-    radial-gradient(circle at 35% 24%, rgba(255, 255, 255, 0.95), transparent 22%),
-    radial-gradient(circle at 68% 72%, rgba(255, 255, 255, 0.82), transparent 28%),
-    linear-gradient(132deg, rgba(175, 227, 255, 0.9), rgba(255, 222, 247, 0.78) 44%, rgba(190, 184, 255, 0.82));
+    radial-gradient(circle at 28% 22%, rgba(255, 255, 255, 0.46), transparent 22%),
+    radial-gradient(circle at 70% 80%, rgba(149, 134, 255, 0.2), transparent 34%),
+    rgba(255, 255, 255, 0.08);
   box-shadow:
-    inset 20px 24px 42px rgba(255, 255, 255, 0.62),
-    inset -22px -28px 54px rgba(95, 105, 203, 0.18),
-    0 32px 100px rgba(87, 115, 185, 0.28);
-  transform: translateZ(0);
+    inset 14px 16px 34px rgba(255, 255, 255, 0.2),
+    inset -22px -28px 58px rgba(95, 105, 203, 0.15),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.26);
+  transform: scale(1);
+  transform-origin: 50% 50%;
+  animation: orb-morph 6.8s ease-in-out infinite;
 }
 
 .voice-orb::before,
@@ -26,29 +27,28 @@
 }
 
 .voice-orb::before {
-  inset: -22%;
+  inset: -34%;
   z-index: 1;
   background:
-    radial-gradient(circle at 25% 24%, rgba(82, 193, 255, 0.68), transparent 20%),
-    radial-gradient(circle at 74% 26%, rgba(255, 203, 238, 0.82), transparent 22%),
-    radial-gradient(circle at 62% 82%, rgba(137, 96, 244, 0.62), transparent 23%),
-    radial-gradient(circle at 32% 70%, rgba(255, 213, 248, 0.56), transparent 26%);
-  filter: blur(18px) saturate(1.18);
-  opacity: 0.92;
-  mix-blend-mode: normal;
-  transform-origin: 42% 58%;
-  will-change: transform;
-  animation: orb-flow 5.2s linear infinite;
+    radial-gradient(circle at 24% 24%, rgba(75, 189, 255, 0.7) 0 16%, transparent 42%),
+    radial-gradient(circle at 76% 76%, rgba(255, 180, 237, 0.7) 0 16%, transparent 42%),
+    radial-gradient(circle at 24% 76%, rgba(125, 91, 245, 0.7) 0 16%, transparent 42%);
+  opacity: 0.66;
+  transform-origin: 50% 50%;
+  animation: orb-field 6.4s linear infinite;
 }
 
 .voice-orb::after {
   inset: 0;
   z-index: 6;
   background:
-    radial-gradient(circle at 28% 18%, rgba(255, 255, 255, 0.34), transparent 18%),
-    radial-gradient(circle at 76% 30%, rgba(255, 255, 255, 0.22), transparent 20%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.22), transparent 46%, rgba(255, 255, 255, 0.16));
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.44), transparent 20%),
+    radial-gradient(circle at 76% 82%, rgba(113, 86, 230, 0.22), transparent 28%),
+    radial-gradient(circle at 50% 50%, transparent 56%, rgba(230, 241, 255, 0.28) 78%, rgba(255, 255, 255, 0.5));
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.34),
+    inset 16px 18px 34px rgba(255, 255, 255, 0.12);
+  opacity: 0.78;
 }
 
 .voice-orb__surface {
@@ -56,174 +56,136 @@
   inset: 0;
   z-index: 4;
   border-radius: inherit;
-  background:
-    radial-gradient(ellipse at 46% 36%, rgba(255, 255, 255, 0.72), transparent 34%),
-    radial-gradient(ellipse at 42% 78%, rgba(255, 255, 255, 0.46), transparent 20%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 70%);
-  filter: blur(1px);
-  mix-blend-mode: screen;
+  overflow: hidden;
+  background: transparent;
 }
 
 .voice-orb__surface::before {
   position: absolute;
-  inset: -28%;
+  inset: -40%;
   content: "";
   border-radius: inherit;
   background:
-    radial-gradient(circle at 20% 34%, rgba(57, 197, 255, 0.58), transparent 18%),
-    radial-gradient(circle at 76% 32%, rgba(255, 173, 235, 0.62), transparent 22%),
-    radial-gradient(circle at 60% 78%, rgba(120, 88, 246, 0.56), transparent 24%),
-    radial-gradient(circle at 34% 70%, rgba(255, 239, 255, 0.52), transparent 20%);
-  filter: blur(16px) saturate(1.22);
-  opacity: 0.86;
-  mix-blend-mode: screen;
-  transform-origin: 48% 52%;
-  will-change: transform;
-  animation: inner-current 3.4s linear infinite;
+    radial-gradient(circle at 26% 28%, rgba(75, 189, 255, 0.66) 0 14%, transparent 40%),
+    radial-gradient(circle at 74% 72%, rgba(255, 180, 237, 0.66) 0 14%, transparent 40%),
+    radial-gradient(circle at 28% 74%, rgba(125, 91, 245, 0.66) 0 14%, transparent 40%);
+  opacity: 0.58;
+  transform-origin: 50% 50%;
+  animation: inner-field 4.2s linear infinite reverse;
+}
+
+.voice-orb__surface::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  border-radius: inherit;
+  background:
+    radial-gradient(ellipse at 32% 18%, rgba(255, 255, 255, 0.44), transparent 22%),
+    radial-gradient(ellipse at 62% 88%, rgba(255, 255, 255, 0.18), transparent 24%);
+  opacity: 0.54;
+  pointer-events: none;
 }
 
 .voice-orb__wash {
   position: absolute;
   z-index: 2;
-  width: 58%;
-  height: 58%;
+  width: 88%;
+  height: 88%;
   border-radius: 50%;
-  filter: blur(24px);
-  mix-blend-mode: normal;
-  opacity: 0.56;
-  will-change: transform;
+  opacity: 0.48;
 }
 
 .voice-orb__wash--cyan {
-  top: 14%;
-  left: 14%;
-  background: #4bbdff;
-  animation: wash-cyan 4s linear infinite;
+  top: -8%;
+  left: -8%;
+  background: radial-gradient(circle, rgba(75, 189, 255, 0.76) 0 28%, transparent 68%);
+  animation: wash-orbit-cyan 4.6s linear infinite;
 }
 
 .voice-orb__wash--rose {
-  top: 16%;
-  right: 8%;
-  background: #ffb4ed;
-  animation: wash-rose 4.8s linear infinite;
+  top: -8%;
+  right: -8%;
+  background: radial-gradient(circle, rgba(255, 180, 237, 0.76) 0 28%, transparent 68%);
+  animation: wash-orbit-rose 5.2s linear infinite reverse;
 }
 
 .voice-orb__wash--violet {
-  right: 15%;
-  bottom: 8%;
-  background: #7d5bf5;
-  animation: wash-violet 3.8s linear infinite;
+  right: -8%;
+  bottom: -8%;
+  background: radial-gradient(circle, rgba(125, 91, 245, 0.76) 0 28%, transparent 68%);
+  animation: wash-orbit-violet 4.9s linear infinite;
 }
 
-.voice-orb__shine {
-  position: absolute;
-  z-index: 7;
-  inset: 1.4%;
-  border-radius: inherit;
-  pointer-events: none;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.52), transparent 28%, transparent 70%, rgba(255, 255, 255, 0.38));
-  opacity: 0.78;
-}
-
-@keyframes orb-flow {
-  0% {
-    transform: translate3d(-1.4%, -0.8%, 0) rotate(-7deg) scale(1.04);
-  }
-
-  25% {
-    transform: translate3d(1.2%, -1.4%, 0) rotate(-1deg) scale(1.08);
-  }
-
-  50% {
-    transform: translate3d(1.5%, 1.1%, 0) rotate(6deg) scale(1.05);
-  }
-
-  75% {
-    transform: translate3d(-1%, 1.4%, 0) rotate(2deg) scale(1.09);
-  }
-
+@keyframes orb-morph {
+  0%,
   100% {
-    transform: translate3d(-1.4%, -0.8%, 0) rotate(-7deg) scale(1.04);
+    border-radius: 49% 51% 48% 52% / 50% 46% 54% 50%;
+    transform: scaleX(1) scaleY(1);
+  }
+
+  26% {
+    border-radius: 58% 42% 53% 47% / 43% 57% 44% 56%;
+    transform: scaleX(1.036) scaleY(0.974);
+  }
+
+  52% {
+    border-radius: 43% 57% 58% 42% / 57% 44% 56% 43%;
+    transform: scaleX(0.972) scaleY(1.034);
+  }
+
+  78% {
+    border-radius: 56% 44% 42% 58% / 47% 59% 41% 53%;
+    transform: scaleX(1.028) scaleY(0.982);
   }
 }
 
-@keyframes inner-current {
-  0% {
-    transform: translate3d(-2%, -1%, 0) rotate(-10deg) scale(1.02);
+@keyframes orb-field {
+  from {
+    transform: rotate(0deg) scale(1.2);
   }
 
-  20% {
-    transform: translate3d(4%, -3%, 0) rotate(12deg) scale(1.08);
-  }
-
-  42% {
-    transform: translate3d(5%, 4%, 0) rotate(28deg) scale(1.04);
-  }
-
-  66% {
-    transform: translate3d(-4%, 5%, 0) rotate(14deg) scale(1.1);
-  }
-
-  84% {
-    transform: translate3d(-5%, 1%, 0) rotate(-4deg) scale(1.05);
-  }
-
-  100% {
-    transform: translate3d(-2%, -1%, 0) rotate(-10deg) scale(1.02);
+  to {
+    transform: rotate(360deg) scale(1.2);
   }
 }
 
-@keyframes wash-cyan {
-  0% {
-    transform: translate3d(-8%, -6%, 0) scale(1.08);
+@keyframes inner-field {
+  from {
+    transform: rotate(0deg) scale(1.24);
   }
 
-  32% {
-    transform: translate3d(20%, 12%, 0) scale(1.24);
-  }
-
-  68% {
-    transform: translate3d(8%, 22%, 0) scale(1.12);
-  }
-
-  100% {
-    transform: translate3d(-8%, -6%, 0) scale(1.08);
+  to {
+    transform: rotate(360deg) scale(1.24);
   }
 }
 
-@keyframes wash-rose {
-  0% {
-    transform: translate3d(8%, -8%, 0) scale(1.12);
+@keyframes wash-orbit-cyan {
+  from {
+    transform: rotate(0deg) translate(36%, 0) rotate(0deg) scale(1.36);
   }
 
-  38% {
-    transform: translate3d(-22%, 16%, 0) scale(1.26);
-  }
-
-  72% {
-    transform: translate3d(-9%, 4%, 0) scale(1.14);
-  }
-
-  100% {
-    transform: translate3d(8%, -8%, 0) scale(1.12);
+  to {
+    transform: rotate(360deg) translate(36%, 0) rotate(-360deg) scale(1.36);
   }
 }
 
-@keyframes wash-violet {
-  0% {
-    transform: translate3d(6%, 10%, 0) scale(1);
+@keyframes wash-orbit-rose {
+  from {
+    transform: rotate(0deg) translate(36%, 0) rotate(0deg) scale(1.36);
   }
 
-  35% {
-    transform: translate3d(-14%, -24%, 0) scale(1.2);
+  to {
+    transform: rotate(360deg) translate(36%, 0) rotate(-360deg) scale(1.36);
+  }
+}
+
+@keyframes wash-orbit-violet {
+  from {
+    transform: rotate(0deg) translate(36%, 0) rotate(0deg) scale(1.36);
   }
 
-  70% {
-    transform: translate3d(12%, -14%, 0) scale(1.12);
-  }
-
-  100% {
-    transform: translate3d(6%, 10%, 0) scale(1);
+  to {
+    transform: rotate(360deg) translate(36%, 0) rotate(-360deg) scale(1.36);
   }
 }
 
@@ -233,7 +195,6 @@
   .voice-orb::after,
   .voice-orb__surface,
   .voice-orb__surface::before,
-  .voice-orb__shine,
   .voice-orb__wash {
     animation: none;
   }
