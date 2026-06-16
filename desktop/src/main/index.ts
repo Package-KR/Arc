@@ -29,10 +29,14 @@ function createWindow(): void {
     height: 820,
     minWidth: 900,
     minHeight: 680,
-    title: 'Arc',
-    backgroundColor: '#ffffff',
+    title: '',
+    backgroundColor: '#00000000',
     show: false,
+    transparent: true,
     autoHideMenuBar: true,
+    ...(process.platform === 'darwin'
+      ? { titleBarStyle: 'hiddenInset' as const, trafficLightPosition: { x: 18, y: 18 } }
+      : {}),
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
@@ -44,6 +48,10 @@ function createWindow(): void {
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
+  })
+
+  mainWindow.on('page-title-updated', (event) => {
+    event.preventDefault()
   })
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
