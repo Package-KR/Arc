@@ -1,10 +1,7 @@
-import './VoiceOrb.css'
+import './style.css'
 
 import type { JSX } from 'react'
 
-/**
- * @description Renders the animated central voice orb.
- */
 export function VoiceOrb(): JSX.Element {
   return (
     <div className="voice-orb" aria-label="Voice orb" role="img">
