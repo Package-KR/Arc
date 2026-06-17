@@ -3,9 +3,6 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
-/**
- * @description Opens external web URLs with a narrow allow-list.
- */
 function openExternalUrl(url: string): void {
   let parsedUrl: URL
 
@@ -20,9 +17,6 @@ function openExternalUrl(url: string): void {
   }
 }
 
-/**
- * @description Creates the primary Arc desktop window.
- */
 function createWindow(): void {
   const mainWindow = new BrowserWindow({
     width: 1180,
