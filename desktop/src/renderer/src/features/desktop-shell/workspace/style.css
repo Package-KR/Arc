@@ -1,0 +1,163 @@
+.arc-workspace {
+  display: grid;
+  position: relative;
+  min-width: 0;
+  min-height: 100vh;
+  place-items: center;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.arc-voice-card {
+  --arc-orb-center-y: clamp(40vh, calc(55.6vh - 72px), 44vh);
+  --arc-copy-button-gap: clamp(42px, 8vmin, 58px);
+  --arc-orb-copy-gap: clamp(30px, 6vmin, 42px);
+  --arc-orb-size: clamp(162px, min(45.5vmin, 38vh), 254px);
+
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: #ffffff;
+  transform: translateX(var(--arc-workspace-center-offset));
+  transition: transform 260ms ease;
+}
+
+.arc-voice-card__orb {
+  display: grid;
+  position: absolute;
+  top: var(--arc-orb-center-y);
+  left: 50%;
+  width: var(--arc-orb-size);
+  aspect-ratio: 1;
+  place-items: center;
+  transform: translate(-50%, -50%);
+}
+
+.arc-voice-card__orb-scale {
+  display: grid;
+  width: 100%;
+  aspect-ratio: 1;
+  place-items: center;
+}
+
+.arc-voice-card__orb-scale > .voice-orb {
+  width: 100%;
+}
+
+.arc-voice-card__content {
+  display: flex;
+  position: absolute;
+  top: calc(var(--arc-orb-center-y) + (var(--arc-orb-size) * 0.5) + var(--arc-orb-copy-gap));
+  left: 50%;
+  width: min(360px, calc(100% - 40px));
+  align-items: center;
+  flex-direction: column;
+  gap: var(--arc-copy-button-gap);
+  transform: translateX(-50%);
+}
+
+.arc-voice-card__copy {
+  display: flex;
+  width: 100%;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  color: #1c2531;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.48;
+  text-align: center;
+}
+
+.arc-voice-card__actions {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.arc-voice-card__button {
+  appearance: none;
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  border: 1px solid #e6eaf0;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow:
+    0 8px 18px rgba(37, 52, 76, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  color: #1f2937;
+  cursor: pointer;
+  outline: none;
+  -webkit-app-region: no-drag;
+}
+
+.arc-voice-card__button[data-muted='true'] {
+  color: #c2414b;
+}
+
+.arc-voice-card__button:hover {
+  border-color: #dbe1ea;
+  background: #ffffff;
+  box-shadow:
+    0 10px 22px rgba(37, 52, 76, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82);
+}
+
+.arc-voice-card__button-icon {
+  display: grid;
+  width: 21px;
+  height: 21px;
+  place-items: center;
+}
+
+.arc-voice-card__button-icon svg {
+  grid-area: 1 / 1;
+  display: block;
+  width: 21px;
+  height: 21px;
+  transform-origin: center;
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.arc-voice-card__button-icon-on {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.arc-voice-card__button-icon-off {
+  opacity: 0;
+  transform: scale(0.86);
+}
+
+.arc-voice-card__button[data-muted='true'] .arc-voice-card__button-icon-on {
+  opacity: 0;
+  transform: scale(0.86);
+}
+
+.arc-voice-card__button[data-muted='true'] .arc-voice-card__button-icon-off {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (max-width: 419px) {
+  .arc-voice-card__content {
+    width: min(286px, calc(100% - 64px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arc-voice-card {
+    transition: none;
+  }
+
+  .arc-voice-card__button-icon svg {
+    transition: opacity 1ms linear;
+    transform: none;
+  }
+}

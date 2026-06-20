@@ -2,9 +2,13 @@ import './style.css'
 
 import type { JSX } from 'react'
 
-export function VoiceOrb(): JSX.Element {
+type VoiceOrbProps = {
+  label: string
+}
+
+export function VoiceOrb({ label }: VoiceOrbProps): JSX.Element {
   return (
-    <div className="voice-orb" aria-label="Voice orb" role="img">
+    <div className="voice-orb" aria-label={label} role="img">
       <span className="voice-orb__surface" />
       <span className="voice-orb__wash voice-orb__wash--cyan" />
       <span className="voice-orb__wash voice-orb__wash--rose" />
