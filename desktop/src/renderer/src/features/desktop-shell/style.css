@@ -1,0 +1,161 @@
+.arc-shell {
+  --arc-workspace-center-offset: 0px;
+  --arc-sidebar-rail-width: 4rem;
+  --arc-sidebar-width: 264px;
+
+  display: block;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.arc-shell__layout {
+  display: grid;
+  grid-template-columns: 0 minmax(0, 1fr);
+  width: 100%;
+  min-width: 0;
+  height: 100vh;
+  transition: grid-template-columns 260ms ease;
+}
+
+.arc-shell__sidebar-panel,
+.arc-shell__workspace-panel {
+  min-width: 0;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.arc-shell__sidebar-panel {
+  grid-column: 1;
+  grid-row: 1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  width: var(--arc-sidebar-rail-width);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-8px);
+  transition:
+    opacity 220ms ease,
+    transform 260ms ease,
+    width 260ms ease;
+}
+
+.arc-shell__workspace-panel {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.arc-shell[data-sidebar-state='expanded'] .arc-shell__sidebar-panel {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
+.arc-shell__drag-region {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  height: 46px;
+  border-bottom: 1px solid #edf0f4;
+  -webkit-app-region: drag;
+}
+
+.arc-shell__sidebar-button {
+  appearance: none;
+  display: grid;
+  position: absolute;
+  top: 0;
+  left: 5rem;
+  z-index: 3;
+  width: 28px;
+  height: 46px;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: #6b7280;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+}
+
+.arc-shell__header-actions {
+  display: flex;
+  position: absolute;
+  top: 0;
+  right: 1.25rem;
+  z-index: 3;
+  height: 46px;
+  gap: 2px;
+  align-items: center;
+  -webkit-app-region: no-drag;
+}
+
+.arc-shell__header-button {
+  appearance: none;
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: #6b7280;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+}
+
+.arc-shell__sidebar-button:hover,
+.arc-shell__header-button:hover {
+  color: #374151;
+}
+
+.arc-shell__header-button-surface {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 6px;
+}
+
+.arc-shell__sidebar-button:hover .arc-shell__header-button-surface,
+.arc-shell__header-button:hover .arc-shell__header-button-surface {
+  background: #f4f6f8;
+}
+
+.arc-shell__header-button-surface svg {
+  display: block;
+  width: 17px;
+  height: 17px;
+}
+
+.arc-shell__sidebar-button .arc-shell__header-button-surface svg {
+  width: 19px;
+  height: 19px;
+}
+
+@media (min-width: 880px) {
+  .arc-shell__sidebar-panel {
+    width: var(--arc-sidebar-width);
+  }
+
+  .arc-shell[data-sidebar-state='expanded'] .arc-shell__layout {
+    grid-template-columns: var(--arc-sidebar-width) minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 879px) {
+  .arc-shell[data-sidebar-state='expanded'] {
+    --arc-workspace-center-offset: calc(var(--arc-sidebar-rail-width) / 2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arc-shell__layout,
+  .arc-shell__sidebar-panel {
+    transition: none;
+  }
+}

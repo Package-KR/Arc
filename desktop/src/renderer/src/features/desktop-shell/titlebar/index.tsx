@@ -1,19 +1,22 @@
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md'
 import { TbLayoutSidebar, TbLayoutSidebarFilled } from 'react-icons/tb'
 
+import './style.css'
+
 import type { JSX } from 'react'
+import type { Translator } from '../../../shared/i18n'
 
 type TitlebarProps = {
+  t: Translator
   isSidebarCollapsed: boolean
   onToggleSidebar: () => void
 }
 
-export function Titlebar({ isSidebarCollapsed, onToggleSidebar }: TitlebarProps): JSX.Element {
-  const sidebarToggleLabel = isSidebarCollapsed ? '사이드바 펼치기' : '사이드바 접기'
+export function Titlebar({ t, isSidebarCollapsed, onToggleSidebar }: TitlebarProps): JSX.Element {
+  const sidebarToggleLabel = isSidebarCollapsed ? t('titlebar.sidebar.expand') : t('titlebar.sidebar.collapse')
   const SidebarToggleIcon = isSidebarCollapsed ? TbLayoutSidebar : TbLayoutSidebarFilled
 
   return (
-    <nav className="arc-titlebar-controls" aria-label="Window navigation">
+    <nav className="arc-titlebar-controls" aria-label={t('titlebar.navigation')}>
       <button
         className="arc-icon-button"
         type="button"
@@ -22,14 +25,6 @@ export function Titlebar({ isSidebarCollapsed, onToggleSidebar }: TitlebarProps)
         onClick={onToggleSidebar}
       >
         <SidebarToggleIcon aria-hidden="true" focusable="false" />
-      </button>
-
-      <button className="arc-icon-button" type="button" aria-label="뒤로 이동" title="뒤로 이동" disabled>
-        <MdKeyboardArrowLeft aria-hidden="true" focusable="false" />
-      </button>
-
-      <button className="arc-icon-button" type="button" aria-label="앞으로 이동" title="앞으로 이동" disabled>
-        <MdKeyboardArrowRight aria-hidden="true" focusable="false" />
       </button>
     </nav>
   )
