@@ -1,7 +1,6 @@
 import { app, shell, BrowserWindow } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import icon from '../../resources/icon.png?asset'
 
 function openExternalUrl(url: string): void {
   let parsedUrl: URL
@@ -18,31 +17,44 @@ function openExternalUrl(url: string): void {
 }
 
 function createWindow(): void {
+  const appLocale = app.getSystemLocale()
+
   const mainWindow = new BrowserWindow({
-    width: 1180,
-    height: 820,
-    minWidth: 900,
-    minHeight: 680,
+    width: 400,
+    height: 640,
+    minWidth: 400,
+    minHeight: 640,
     title: '',
-    backgroundColor: '#00000000',
-    show: false,
-    transparent: true,
+    backgroundColor: '#ffffff',
     autoHideMenuBar: true,
+    show: false,
+    resizable: true,
+    transparent: false,
     ...(process.platform === 'darwin'
-      ? { titleBarStyle: 'hiddenInset' as const, trafficLightPosition: { x: 18, y: 18 } }
+      ? { titleBarStyle: 'hiddenInset' as const, trafficLightPosition: { x: 18, y: 16 } }
       : {}),
-    ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
+      additionalArguments: [`--arc-locale=${encodeURIComponent(appLocale)}`],
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: true
     }
   })
 
+  const showWindowButtons = (): void => {
+    if (process.platform === 'darwin') {
+      mainWindow.setWindowButtonVisibility(true)
+    }
+  }
+
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
+    showWindowButtons()
   })
+
+  mainWindow.on('focus', showWindowButtons)
+  mainWindow.on('blur', showWindowButtons)
 
   mainWindow.on('page-title-updated', (event) => {
     event.preventDefault()
