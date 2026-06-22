@@ -1,5 +1,5 @@
-import { BsGear, BsLayers, BsShieldCheck, BsTerminal } from 'react-icons/bs'
-import { IoFolderOpenOutline } from 'react-icons/io5'
+import { BsGear } from 'react-icons/bs'
+import { PiNotePencilLight } from 'react-icons/pi'
 
 import './style.css'
 
@@ -7,7 +7,7 @@ import type { JSX } from 'react'
 import type { IconType } from 'react-icons'
 import type { I18nKey, Translator } from '../../../shared/i18n'
 
-export type SidebarViewId = 'library' | 'context' | 'runs' | 'approvals' | 'settings'
+export type SidebarViewId = 'compose' | 'settings'
 
 type SidebarItem = {
   labelKey: I18nKey
@@ -21,23 +21,20 @@ type SidebarSection = {
 
 type SidebarView = {
   id: SidebarViewId
-  count: string
+  count?: string
   labelKey: I18nKey
   Icon: IconType
 }
 
 type SidebarProps = {
   t: Translator
-  activeViewId: SidebarViewId
+  activeViewId: SidebarViewId | null
   isCollapsed: boolean
   onSelectView: (viewId: SidebarViewId) => void
 }
 
 const SIDEBAR_VIEWS: SidebarView[] = [
-  { id: 'library', count: '3', labelKey: 'sidebar.library.label', Icon: IoFolderOpenOutline },
-  { id: 'context', count: '2', labelKey: 'sidebar.context.label', Icon: BsLayers },
-  { id: 'runs', count: '0', labelKey: 'sidebar.runs.label', Icon: BsTerminal },
-  { id: 'approvals', count: '0', labelKey: 'sidebar.approvals.label', Icon: BsShieldCheck }
+  { id: 'compose', labelKey: 'sidebar.item.newSession', Icon: PiNotePencilLight }
 ]
 
 const SIDEBAR_SETTINGS_VIEW: SidebarView = {
@@ -83,14 +80,17 @@ export function Sidebar({ t, activeViewId, isCollapsed, onSelectView }: SidebarP
                 title={label}
                 aria-label={label}
                 aria-current={isActive ? 'page' : undefined}
+                aria-pressed={isActive}
                 data-active={isActive ? 'true' : 'false'}
                 onClick={() => onSelectView(view.id)}
               >
                 <Icon aria-hidden="true" focusable="false" />
                 <span className="arc-sidebar__nav-label">{label}</span>
-                <span className="arc-sidebar__nav-count" aria-hidden="true">
-                  {view.count}
-                </span>
+                {view.count ? (
+                  <span className="arc-sidebar__nav-count" aria-hidden="true">
+                    {view.count}
+                  </span>
+                ) : null}
               </button>
             )
           })}
@@ -120,6 +120,7 @@ export function Sidebar({ t, activeViewId, isCollapsed, onSelectView }: SidebarP
             title={t(SIDEBAR_SETTINGS_VIEW.labelKey)}
             aria-label={t(SIDEBAR_SETTINGS_VIEW.labelKey)}
             aria-current={activeViewId === SIDEBAR_SETTINGS_VIEW.id ? 'page' : undefined}
+            aria-pressed={activeViewId === SIDEBAR_SETTINGS_VIEW.id}
             data-active={activeViewId === SIDEBAR_SETTINGS_VIEW.id ? 'true' : 'false'}
             onClick={() => onSelectView(SIDEBAR_SETTINGS_VIEW.id)}
           >

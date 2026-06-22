@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 
+import { CgEditFlipH } from 'react-icons/cg'
 import { GoKebabHorizontal } from 'react-icons/go'
-import { TbLayoutSidebar, TbLayoutSidebarFilled } from 'react-icons/tb'
 
 import { Sidebar } from './sidebar'
 import { Workspace } from './workspace'
@@ -14,13 +14,16 @@ import type { SidebarViewId } from './sidebar'
 
 export function DesktopShell(): JSX.Element {
   const t = useMemo(() => createTranslator(resolveLanguage('system', getSystemLanguage())), [])
-  const [activeViewId, setActiveViewId] = useState<SidebarViewId>('library')
+  const [activeViewId, setActiveViewId] = useState<SidebarViewId | null>(null)
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(false)
   const sidebarToggleLabel = isSidebarExpanded ? t('titlebar.sidebar.collapse') : t('titlebar.sidebar.expand')
-  const SidebarToggleIcon = isSidebarExpanded ? TbLayoutSidebarFilled : TbLayoutSidebar
 
   const toggleSidebar = (): void => {
     setIsSidebarExpanded((currentValue) => !currentValue)
+  }
+
+  const toggleSidebarView = (viewId: SidebarViewId): void => {
+    setActiveViewId((currentViewId) => (currentViewId === viewId ? null : viewId))
   }
 
   return (
@@ -37,7 +40,7 @@ export function DesktopShell(): JSX.Element {
         onClick={toggleSidebar}
       >
         <span className="arc-shell__header-button-surface">
-          <SidebarToggleIcon aria-hidden="true" />
+          <CgEditFlipH aria-hidden="true" />
         </span>
       </button>
       <div className="arc-shell__header-actions">
@@ -53,7 +56,7 @@ export function DesktopShell(): JSX.Element {
             t={t}
             activeViewId={activeViewId}
             isCollapsed={!isSidebarExpanded}
-            onSelectView={setActiveViewId}
+            onSelectView={toggleSidebarView}
           />
         </div>
         <div className="arc-shell__workspace-panel">
